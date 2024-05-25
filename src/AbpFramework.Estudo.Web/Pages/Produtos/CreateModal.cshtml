@@ -1,0 +1,35 @@
+﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model AbpFramework.Estudo.Web.Pages.Produtos.CreateModalModel
+@{
+    Layout = null;
+}
+
+<form method="post" asp-page="CreateModal">
+    <abp-modal>
+        <abp-modal-header title="Inserir Produto"></abp-modal-header>
+        <abp-modal-body>
+            <div class="form-group mb-3">
+                <label asp-for="ViewModel.Nome"></label>
+                <input class="form-control" type="text" asp-for="ViewModel.Nome"/>
+                <span asp-validation-for="ViewModel.Nome" class="Text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ViewModel.Preco"></label>
+                <input class="form-control" type="text" asp-for="ViewModel.Preco" />
+                <span asp-validation-for="ViewModel.Preco" class="Text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ViewModel.CategoriaId"></label>
+                <select class="form-control" asp-for="ViewModel.CategoriaId" asp-items="@Model.Categorias"></select>
+                <span asp-validation-for="ViewModel.CategoriaId" class="Text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ViewModel.FornecedorId"></label>
+                <select class="form-control" asp-for="ViewModel.FornecedorId" asp-items="@Model.Fornecedores"></select>
+                <span asp-validation-for="ViewModel.FornecedorId" class="Text-danger"></span>
+            </div>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

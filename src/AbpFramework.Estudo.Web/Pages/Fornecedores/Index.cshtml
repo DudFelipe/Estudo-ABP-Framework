@@ -1,0 +1,47 @@
+﻿@page
+@using AbpFramework.Estudo.Localization
+@using AbpFramework.Estudo.Web.Menus
+@using AbpFramework.Estudo.Web.Pages
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@model AbpFramework.Estudo.Web.Pages.Fornecedores.IndexModel
+@inject IPageLayout PageLayout
+@inject IHtmlLocalizer<EstudoResource> L
+@{
+    PageLayout.Content.Title = "Fornecedor";
+    PageLayout.Content.BreadCrumb.Add("Fornecedores");
+    PageLayout.Content.MenuItemName = EstudoMenus.Fornecedor;
+}
+
+@section scripts
+{
+    <abp-script src="/Pages/Fornecedores/index.js" />
+}
+@section styles
+{
+    <abp-style src="/Pages/Fornecedores/index.css" />
+}
+
+<abp-card>
+    <abp-card-body>
+        <abp-row class="mb-3">
+            <abp-column size-md ="_6">
+                <a abp-collapse-id="FornecedorCollapse" class="text-secondary">Filtro</a>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                <abp-button id="NewFornecedorButton"
+                            text="Inserir Fornecedor"
+                            icon="plus"
+                            class="btn-sm"
+                            button-type="Primary" />
+            </abp-column>
+        </abp-row>
+        <abp-dynamic-form abp-model="FornecedorFilter" id="FornecedorFilter" required-symbols="false" column-size="_6">
+            <abp-collapse-body id="FornecedorCollapse">
+                <abp-form-content />
+            </abp-collapse-body>
+        </abp-dynamic-form>
+        <hr class="mt-2"/>
+        <abp-table striped-rows="true" id="FornecedorTable" class="nowrap" />
+    </abp-card-body>
+</abp-card>
