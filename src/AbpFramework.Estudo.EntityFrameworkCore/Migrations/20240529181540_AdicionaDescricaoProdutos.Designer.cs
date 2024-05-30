@@ -4,6 +4,7 @@ using AbpFramework.Estudo.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace AbpFramework.Estudo.Migrations
 {
     [DbContext(typeof(EstudoDbContext))]
-    partial class EstudoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240529181540_AdicionaDescricaoProdutos")]
+    partial class AdicionaDescricaoProdutos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

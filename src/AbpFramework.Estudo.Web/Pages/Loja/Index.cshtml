@@ -1,0 +1,46 @@
+﻿@page
+@using AbpFramework.Estudo.Localization
+@using AbpFramework.Estudo.Web.Menus
+@using AbpFramework.Estudo.Web.Pages
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@model AbpFramework.Estudo.Web.Pages.Loja.IndexModel
+@inject IPageLayout PageLayout
+@inject IHtmlLocalizer<EstudoResource> L
+@{
+    PageLayout.Content.Title = "Loja";
+    PageLayout.Content.BreadCrumb.Add("Loja");
+    PageLayout.Content.MenuItemName = EstudoMenus.Loja;
+}
+
+@section scripts
+{
+    <abp-script src="/Pages/Loja/index.js" />
+}
+@section styles
+{
+    <abp-style src="/Pages/Loja/index.css" />
+}
+
+<div class="row">
+@foreach(var viewModel in @Model.ViewModels)
+{
+    <div class="col col-md-3">
+        <abp-card style="width: 18rem;">
+            <abp-carousel indicators="false">
+                @foreach (var imagem in viewModel.Imagens)
+                {
+                    <abp-carousel-item src="@imagem.Path" style="width: 200px; height: 200px;"></abp-carousel-item>
+                }
+            </abp-carousel>
+            <abp-card-body>
+                <abp-card-title>@viewModel.Nome</abp-card-title>
+                <abp-card-text>@viewModel.Descricao</abp-card-text>
+                <abp-card-text>Preço: @viewModel.Preco</abp-card-text>
+                <a abp-button="Primary" href="#">Adicionar ao carrinho</a>
+            </abp-card-body>
+        </abp-card>
+    </div>
+}
+</div>
+

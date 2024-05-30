@@ -4,6 +4,7 @@ using AbpFramework.Estudo.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace AbpFramework.Estudo.Migrations
 {
     [DbContext(typeof(EstudoDbContext))]
-    partial class EstudoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240527135124_Campo_Imagem_Produto")]
+    partial class Campo_Imagem_Produto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,31 +92,6 @@ namespace AbpFramework.Estudo.Migrations
                     b.ToTable("Fornecedores", (string)null);
                 });
 
-            modelBuilder.Entity("AbpFramework.Estudo.Produtos.ImagemProduto", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Des_Nome");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Des_Path");
-
-                    b.Property<Guid>("ProdutoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("ImagensProdutos", (string)null);
-                });
-
             modelBuilder.Entity("AbpFramework.Estudo.Produtos.Produto", b =>
                 {
                     b.Property<Guid>("Id")
@@ -130,11 +108,6 @@ namespace AbpFramework.Estudo.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp");
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Des_Descri");
-
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -142,6 +115,11 @@ namespace AbpFramework.Estudo.Migrations
 
                     b.Property<Guid>("FornecedorId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Imagem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Val_Imagem");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -1907,17 +1885,6 @@ namespace AbpFramework.Estudo.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
-            modelBuilder.Entity("AbpFramework.Estudo.Produtos.ImagemProduto", b =>
-                {
-                    b.HasOne("AbpFramework.Estudo.Produtos.Produto", "Produto")
-                        .WithMany("Imagens")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Produto");
-                });
-
             modelBuilder.Entity("AbpFramework.Estudo.Produtos.Produto", b =>
                 {
                     b.HasOne("AbpFramework.Estudo.Categorias.Categoria", "Categoria")
@@ -2087,11 +2054,6 @@ namespace AbpFramework.Estudo.Migrations
             modelBuilder.Entity("AbpFramework.Estudo.Fornecedores.Fornecedor", b =>
                 {
                     b.Navigation("Produtos");
-                });
-
-            modelBuilder.Entity("AbpFramework.Estudo.Produtos.Produto", b =>
-                {
-                    b.Navigation("Imagens");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

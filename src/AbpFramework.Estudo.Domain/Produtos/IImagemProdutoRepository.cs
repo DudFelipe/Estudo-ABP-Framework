@@ -7,9 +7,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace AbpFramework.Estudo.Produtos
 {
-    public interface IProdutoRepository : IRepository<Produto>
+    public interface IImagemProdutoRepository : IRepository<ImagemProduto>
     {
-        Task<IQueryable<Produto>> WithDetailsAndImagesAsync(Guid id);
-        Task<List<Produto>> WithDetailsAndImagesAsync();
     }
 }

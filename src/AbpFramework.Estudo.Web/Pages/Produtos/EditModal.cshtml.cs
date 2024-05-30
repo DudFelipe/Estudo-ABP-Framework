@@ -3,10 +3,12 @@ using AbpFramework.Estudo.Fornecedores;
 using AbpFramework.Estudo.Produtos;
 using AbpFramework.Estudo.Produtos.Dtos;
 using AbpFramework.Estudo.Web.Pages.Produtos.ViewModels;
+using AbpFramework.Estudo.Web.Utils.Produtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
@@ -56,7 +58,26 @@ namespace AbpFramework.Estudo.Web.Pages.Produtos
 
         public virtual async Task<IActionResult> OnPostAsync()
         {
+            var produtoAntigo = await _produtoAppService.GetWithImages(Id);
+
+            ProdutoUtils.ExcluirArquivos(produtoAntigo.Imagens.Select(x => x.Nome).ToList());
+
             var dto = ObjectMapper.Map<CreateEditProdutoViewModel, CreateUpdateProdutoDto>(ViewModel);
+
+            foreach (var imagem in ViewModel.ImagensUpload)
+            {
+                var prefixo = GuidGenerator.Create() + "_";
+
+                if (!await ProdutoUtils.UploadArquivo(imagem, prefixo))
+                    return BadRequest("Houve um problema ao realizar o upload da imagem: " + imagem.FileName);
+
+                dto.Imagens.Add(new ImagemProdutoDto
+                {
+                    Nome = prefixo + imagem.FileName,
+                    Path = "https://localhost:44326/imagens/" + prefixo + imagem.FileName
+                });
+            }
+
             await _produtoAppService.UpdateAsync(Id, dto);
             return NoContent();
         }

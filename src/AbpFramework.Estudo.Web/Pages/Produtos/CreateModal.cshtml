@@ -20,6 +20,16 @@
                 <span asp-validation-for="ViewModel.Preco" class="Text-danger"></span>
             </div>
             <div class="form-group mb-3">
+                <label asp-for="ViewModel.Descricao"></label>
+                <textarea class="form-control" type="text" asp-for="ViewModel.Descricao"></textarea>
+                <span asp-validation-for="ViewModel.Descricao" class="Text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label data-browse="Procurar" asp-for="ViewModel.ImagensUpload"></label>
+                <input type="file" class="form-control" asp-for="ViewModel.ImagensUpload" id="ImagemUpload" multiple/>
+                <label style="display: none" id="img_nome"></label>
+            </div>
+            <div class="form-group mb-3">
                 <label asp-for="ViewModel.CategoriaId"></label>
                 <select class="form-control" asp-for="ViewModel.CategoriaId" asp-items="@Model.Categorias"></select>
                 <span asp-validation-for="ViewModel.CategoriaId" class="Text-danger"></span>
@@ -33,3 +43,13 @@
         <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
     </abp-modal>
 </form>
+
+<script>
+    $("#ImagemUpload").change(function(){
+        $("#img_nome").text(this.files[0].name);
+        $("#img_nome")[0].style.display = 'block';
+    });
+
+    $("#ImagemUpload").attr("data-val", "true");
+    $("#ImagemUpload").attr("data-val-required", "Preencha o campo Imagem");
+</script>

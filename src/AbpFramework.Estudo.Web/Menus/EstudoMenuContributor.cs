@@ -35,6 +35,7 @@ public class EstudoMenuContributor : IMenuContributor
         );
 
         context.Menu.Items.Insert(1, new ApplicationMenuItem(EstudoMenus.GerenciamentoProdutos, "Gerenciamento de Produtos", "~/", icon: "fa-solid fa-folder-closed", order: 1));
+        context.Menu.Items.Insert(1, new ApplicationMenuItem(EstudoMenus.TesteLoja, "Teste de Loja", "~/", icon: "fa-solid fa-folder-closed", order: 2));
 
         if (MultiTenancyConsts.IsEnabled)
         {
@@ -52,6 +53,9 @@ public class EstudoMenuContributor : IMenuContributor
         gerenciamentoProduto.Items.Insert(0, new ApplicationMenuItem(EstudoMenus.Categoria, "Categorias", "/Categorias", icon: "fa-solid fa-list", order: 0));
         gerenciamentoProduto.Items.Insert(0, new ApplicationMenuItem(EstudoMenus.Produto, "Produtos", "/Produtos", icon: "fa-solid fa-lightbulb", order: 1));
         gerenciamentoProduto.Items.Insert(0, new ApplicationMenuItem(EstudoMenus.Fornecedor, "Fornecedores", "/Fornecedores", icon: "fa-solid fa-truck-fast", order: 2));
+
+        var testeLoja = context.Menu.GetMenuItem(EstudoMenus.TesteLoja);
+        testeLoja.Items.Insert(0, new ApplicationMenuItem(EstudoMenus.Loja, "Loja", "/Loja", icon: "", order: 0));
 
         return Task.CompletedTask;
     }

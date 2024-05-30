@@ -23,6 +23,7 @@ public class EstudoApplicationAutoMapperProfile : Profile
         CreateMap<CreateUpdateCategoriaDto, Categoria>(MemberList.Source).ReverseMap();
 
         CreateMap<Produto, ProdutoDto>().ReverseMap();
+        //CreateMap<List<Produto>, List<ProdutoDto>>().ReverseMap();
         CreateMap<List<Produto>, PagedResultDto<ProdutoDto>>().ReverseMap();
         CreateMap<CreateUpdateProdutoDto, Produto>(MemberList.Source).ReverseMap();
 
@@ -30,5 +31,7 @@ public class EstudoApplicationAutoMapperProfile : Profile
         CreateMap<List<Fornecedor>, PagedResultDto<FornecedorDto>>().ReverseMap();
         CreateMap<CreateFornecedorDto, Fornecedor>(MemberList.Source).ReverseMap();
         CreateMap<UpdateFornecedorDto, Fornecedor>(MemberList.Source).ReverseMap();
+
+        CreateMap<ImagemProduto, ImagemProdutoDto>().ReverseMap();
     }
 }

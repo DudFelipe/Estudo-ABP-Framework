@@ -4,6 +4,7 @@ using AbpFramework.Estudo.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace AbpFramework.Estudo.Migrations
 {
     [DbContext(typeof(EstudoDbContext))]
-    partial class EstudoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240527190659_Removendo_campo_imagem_da_tabela_produtos")]
+    partial class Removendo_campo_imagem_da_tabela_produtos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,11 +132,6 @@ namespace AbpFramework.Estudo.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Des_Descri");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()

@@ -16,5 +16,10 @@ namespace AbpFramework.Estudo.Produtos
 
             return query.Include(c => c.Categoria).Include(p => p.Fornecedor);
         }
+
+        public static IQueryable<Produto> IncludeImages(this IQueryable<Produto> query)
+        {
+            return query.Include(i => i.Imagens);
+        }
     }
 }

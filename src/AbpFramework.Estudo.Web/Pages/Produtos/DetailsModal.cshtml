@@ -1,0 +1,43 @@
+﻿@page
+@model AbpFramework.Estudo.Web.Pages.Produtos.DetailsModalModel
+@{
+    Layout = null;
+}
+
+<abp-modal>
+    <abp-modal-header title="Detalhes do produto: @Model.ViewModel.Nome"></abp-modal-header>
+    <abp-modal-body>
+        <div class="row justify-content-between">
+            <div class="col-md-4">
+                <abp-carousel indicators="false">
+                    @foreach (var imagem in @Model.ViewModel.Imagens)
+                    {
+                        <abp-carousel-item src="@imagem.Path" style="width: 200px; height: 200px"></abp-carousel-item>
+                    }
+                </abp-carousel>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="font-weight-bold" asp-for="ViewModel.Nome"></label></b>
+                    <label asp-for="ViewModel.Nome">@Model.ViewModel.Nome</label>
+                </div>
+                <div class="form-group">
+                    <b><label asp-for="ViewModel.Preco"></label></b>
+                    <label asp-for="ViewModel.Preco">@Model.ViewModel.Preco</label>
+                </div>
+                <div class="form-group">
+                    <b><label asp-for="ViewModel.Descricao"></label></b>
+                    <label asp-for="ViewModel.Descricao">@Model.ViewModel.Descricao</label>
+                </div>
+                <div class="form-group">
+                    <b><label asp-for="ViewModel.Categoria"></label></b>
+                    <label asp-for="ViewModel.Categoria">@Model.ViewModel.Categoria</label>
+                </div>
+                <div class="form-group">
+                    <b><label asp-for="ViewModel.Fornecedor"></label></b>
+                    <label asp-for="ViewModel.Fornecedor">@Model.ViewModel.Fornecedor</label>
+                </div>
+            </div>
+        </div>
+    </abp-modal-body>
+</abp-modal>

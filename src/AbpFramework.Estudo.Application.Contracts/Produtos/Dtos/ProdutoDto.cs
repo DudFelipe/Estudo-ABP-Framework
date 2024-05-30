@@ -13,6 +13,8 @@ namespace AbpFramework.Estudo.Produtos.Dtos
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public decimal Preco { get; set; }
+        public string Descricao { get; set; }
+        public List<ImagemProdutoDto> Imagens { get; set; }
 
         public CategoriaDto Categoria { get; set; }
         public FornecedorDto Fornecedor { get; set; }

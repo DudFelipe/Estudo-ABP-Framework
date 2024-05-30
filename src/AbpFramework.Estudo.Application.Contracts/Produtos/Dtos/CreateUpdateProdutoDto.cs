@@ -15,10 +15,22 @@ namespace AbpFramework.Estudo.Produtos.Dtos
         [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         public decimal Preco { get; set; }
 
+        [Display(Name = "Descrição")]
+        [Required(ErrorMessage = "O campo {0} é obrigatório!")]
+        public string Descricao { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório!")]
+        public List<ImagemProdutoDto> Imagens { get; set; }
+
         [Required(ErrorMessage = "Não é possível inserir um produto sem definir uma Categoria!")]
         public Guid CategoriaId { get; set; }
 
         [Required(ErrorMessage = "Não é possível inserir um produto sem definir um Fornecedor!")]
         public Guid FornecedorId { get; set; }
+
+        public CreateUpdateProdutoDto()
+        {
+            Imagens = new List<ImagemProdutoDto>();
+        }
     }
 }

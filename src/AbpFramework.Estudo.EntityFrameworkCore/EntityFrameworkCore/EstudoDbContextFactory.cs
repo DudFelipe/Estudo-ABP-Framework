@@ -17,7 +17,8 @@ public class EstudoDbContextFactory : IDesignTimeDbContextFactory<EstudoDbContex
         var configuration = BuildConfiguration();
 
         var builder = new DbContextOptionsBuilder<EstudoDbContext>()
-            .UseSqlServer(configuration.GetConnectionString("Default"));
+            .UseSqlServer(configuration.GetConnectionString("Default"))
+            .EnableSensitiveDataLogging();
 
         return new EstudoDbContext(builder.Options);
     }

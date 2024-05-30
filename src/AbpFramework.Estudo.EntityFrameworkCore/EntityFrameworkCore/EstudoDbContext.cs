@@ -59,6 +59,7 @@ public class EstudoDbContext :
 
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<Produto> Produtos { get; set; }
+    public DbSet<ImagemProduto> ImagensProdutos { get; set; }
     public DbSet<Fornecedor> Fornecedores { get; set; }
 
     public EstudoDbContext(DbContextOptions<EstudoDbContext> options)

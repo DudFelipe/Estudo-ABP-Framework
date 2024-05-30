@@ -19,6 +19,7 @@ namespace AbpFramework.Estudo.EntityFrameworkCore.Configuration
             builder.Property(p => p.Id).HasColumnName("Seq_Produt");
             builder.Property(p => p.Nome).HasColumnName("Des_Nome").IsRequired().HasMaxLength(ProdutoConsts.Pro_NomeMaxLength);
             builder.Property(p => p.Preco).HasColumnName("Val_Preco").IsRequired();
+            builder.Property(p => p.Descricao).HasColumnName("Des_Descri");
 
             //Relacionamento com Categoria
             builder.HasOne(p => p.Categoria)

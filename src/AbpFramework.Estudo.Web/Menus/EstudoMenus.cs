@@ -11,4 +11,7 @@ public class EstudoMenus
     public const string Produto = Prefix + ".Produtos";
     public const string Fornecedor = Prefix + ".Fornecedores";
 
+    public const string TesteLoja = Prefix + ".TesteLoja";
+    public const string Loja = Prefix + ".Loja";
+
 }

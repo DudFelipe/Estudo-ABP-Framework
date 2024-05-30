@@ -1,5 +1,4 @@
 ﻿using AbpFramework.Estudo.Produtos.Dtos;
-using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +14,34 @@ namespace AbpFramework.Estudo.Produtos
     {
         private readonly IProdutoRepository _produtoRepository;
         private readonly IProdutoManager _produtoManager;
+        private readonly IImagemProdutoManager _imagemProdutoManager;
 
-        public ProdutoAppService(IProdutoRepository produtoRepository, IProdutoManager produtoManager)
+        public ProdutoAppService(IProdutoRepository produtoRepository,
+                                 IProdutoManager produtoManager,
+                                 IImagemProdutoManager imagemProdutoManager)
         {
             _produtoRepository = produtoRepository;
             _produtoManager = produtoManager;
+            _imagemProdutoManager = imagemProdutoManager;
         }
 
         public async Task<ProdutoDto> GetAsync(Guid id)
         {
             return ObjectMapper.Map<Produto, ProdutoDto>(await _produtoRepository.GetAsync(p => p.Id == id));
+        }
+
+        public async Task<ProdutoDto> GetWithImages(Guid id)
+        {
+            var produto = await _produtoRepository.WithDetailsAndImagesAsync(id);
+
+            return ObjectMapper.Map<Produto, ProdutoDto>(produto.FirstOrDefault());
+        }
+
+        public async Task<List<ProdutoDto>> GetWithImages()
+        {
+            var produtos = await _produtoRepository.WithDetailsAndImagesAsync();
+
+            return ObjectMapper.Map<List<Produto>, List<ProdutoDto>>(produtos);
         }
 
         public async Task<PagedResultDto<ProdutoDto>> GetListAsync(ProdutoGetListInput input)
@@ -61,6 +78,10 @@ namespace AbpFramework.Estudo.Produtos
             produto.SetNome(input.Nome);
             produto.SetPreco(input.Preco);
             produto.SetCategoria(input.CategoriaId);
+            produto.SetImagens(ObjectMapper.Map<List<ImagemProdutoDto>, List<ImagemProduto>>(input.Imagens));
+            produto.SetDescricao(input.Descricao);
+
+            await _imagemProdutoManager.Excluir(i => i.ProdutoId == produto.Id);
 
             return ObjectMapper.Map<Produto, ProdutoDto>(await _produtoManager.Alterar(produto));
         }

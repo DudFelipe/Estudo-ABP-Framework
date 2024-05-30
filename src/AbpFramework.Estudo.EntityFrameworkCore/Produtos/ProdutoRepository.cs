@@ -22,5 +22,15 @@ namespace AbpFramework.Estudo.Produtos
         {
             return (await GetQueryableAsync()).IncludeDetails();
         }
+
+        public async Task<IQueryable<Produto>> WithDetailsAndImagesAsync(Guid id)
+        {
+            return (await GetQueryableAsync()).IncludeDetails().IncludeImages().Where(x => x.Id == id);
+        }
+
+        public async Task<List<Produto>> WithDetailsAndImagesAsync()
+        {
+            return (await GetQueryableAsync()).IncludeDetails().IncludeImagesList();
+        }
     }
 }
